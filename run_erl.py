@@ -9,8 +9,10 @@ import argparse
 
 render = False
 parser = argparse.ArgumentParser()
+parser.add_argument("--seed", default=0, type=int)
 parser.add_argument('-env', help='Environment Choices: (HalfCheetah-v2) (Ant-v2) (Reacher-v2) (Walker2d-v2) (Swimmer-v2) (Hopper-v2)', required=True)
 env_tag = vars(parser.parse_args())['env']
+args = parser.parse_args()
 
 
 class Parameters:
@@ -166,6 +168,9 @@ class Agent:
 
 if __name__ == "__main__":
     parameters = Parameters()  # Create the Parameters class
+    parameters.seed = args.seed
+    print("parameters.seed,", parameters.seed)
+
     tracker = utils.Tracker(parameters, ['erl'], '_score.csv')  # Initiate tracker
     frame_tracker = utils.Tracker(parameters, ['frame_erl'], '_score.csv')  # Initiate tracker
     time_tracker = utils.Tracker(parameters, ['time_erl'], '_score.csv')
@@ -184,7 +189,7 @@ if __name__ == "__main__":
     print('Running', env_tag, ' State_dim:', parameters.state_dim, ' Action_dim:', parameters.action_dim)
 
     next_save = 100; time_start = time.time()
-    while agent.num_frames <= parameters.num_frames:
+    while agent.num_frames <= 1000000:
         best_train_fitness, erl_score, elite_index = agent.train()
         print('#Games:', agent.num_games, '#Frames:', agent.num_frames, ' Epoch_Max:', '%.2f'%best_train_fitness if best_train_fitness != None else None, ' Test_Score:','%.2f'%erl_score if erl_score != None else None, ' Avg:','%.2f'%tracker.all_tracker[0][1], 'ENV '+env_tag)
         print('RL Selection Rate: Elite/Selected/Discarded', '%.2f'%(agent.evolver.selection_stats['elite']/agent.evolver.selection_stats['total']),

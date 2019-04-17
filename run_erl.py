@@ -16,7 +16,7 @@ args = parser.parse_args()
 
 
 class Parameters:
-    def __init__(self):
+    def __init__(self,seed):
 
         #Number of Frames to Run
         if env_tag == 'Hopper-v2': self.num_frames = 4000000
@@ -34,7 +34,7 @@ class Parameters:
         #DDPG params
         self.use_ln = True
         self.gamma = 0.99; self.tau = 0.001
-        self.seed = 7
+        self.seed = seed
         self.batch_size = 128
         self.buffer_size = 1000000
         self.frac_frames_train = 1.0
@@ -58,7 +58,7 @@ class Parameters:
 
         #Save Results
         self.state_dim = None; self.action_dim = None #Simply instantiate them here, will be initialized later
-        self.save_foldername = 'R_ERL/'
+        self.save_foldername = 'R_ERL/%s' % seed
         if not os.path.exists(self.save_foldername): os.makedirs(self.save_foldername)
 
 class Agent:
@@ -167,8 +167,8 @@ class Agent:
         return best_train_fitness, test_score, elite_index
 
 if __name__ == "__main__":
-    parameters = Parameters()  # Create the Parameters class
-    parameters.seed = args.seed
+    parameters = Parameters(args.seed)  # Create the Parameters class
+    # parameters.seed = args.seed
     print("parameters.seed,", parameters.seed)
 
     tracker = utils.Tracker(parameters, ['erl'], '_score.csv')  # Initiate tracker

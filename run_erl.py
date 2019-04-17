@@ -10,7 +10,7 @@ import argparse
 render = False
 parser = argparse.ArgumentParser()
 parser.add_argument("--seed", default=0, type=int)
-parser.add_argument('-env', help='Environment Choices: (HalfCheetah-v2) (Ant-v2) (Reacher-v2) (Walker2d-v2) (Swimmer-v2) (Hopper-v2)', required=True)
+parser.add_argument('--env', help='Environment Choices: (HalfCheetah-v2) (Ant-v2) (Reacher-v2) (Walker2d-v2) (Swimmer-v2) (Hopper-v2)', required=True)
 env_tag = vars(parser.parse_args())['env']
 args = parser.parse_args()
 

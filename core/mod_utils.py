@@ -121,11 +121,11 @@ class SumTree:
 
         return (idx, self.tree[idx], self.data[dataIdx])
 
-class NormalizedActions:#(gym.ActionWrapper):
-    def __init__(self,env_name):
-        self.env = gym.make(env_name)
-        self.action_low = float(self.env.action_space.low[0])
-        self.action_high = float(self.env.action_space.high[0])
+class NormalizedActions(gym.ActionWrapper):
+    # def __init__(self,env_name):
+    #     self.env = gym.make(env_name)
+    #     self.action_low = float(self.env.action_space.low[0])
+    #     self.action_high = float(self.env.action_space.high[0])
 
     def step(self, action: object): #Expects a numpy action
         """Take an action to forward the simulation
@@ -138,7 +138,7 @@ class NormalizedActions:#(gym.ActionWrapper):
                 info (None): Template from OpenAi gym (doesnt have anything)
         """
 
-        action = self.action_low + action * (self.action_high - self.action_low)
+        action = self.action_space.low + action * (self.action_space.high - self.action_space.low)
         return self.env.step(action)
 
     def _action(self, action):

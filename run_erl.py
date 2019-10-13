@@ -151,18 +151,18 @@ class Agent:
         #DDPG Experience Collection
         self.evaluate(self.rl_agent.actor, is_render=False, is_action_noise=True) #Train
 
-        #DDPG learning step
-        if len(self.replay_buffer) > self.args.batch_size * 5:
-            for _ in range(int(self.gen_frames*self.args.frac_frames_train)):
-                transitions = self.replay_buffer.sample(self.args.batch_size)
-                batch = replay_memory.Transition(*zip(*transitions))
-                self.rl_agent.update_parameters(batch)
+        # #DDPG learning step
+        # if len(self.replay_buffer) > self.args.batch_size * 5:
+        #     for _ in range(int(self.gen_frames*self.args.frac_frames_train)):
+        #         transitions = self.replay_buffer.sample(self.args.batch_size)
+        #         batch = replay_memory.Transition(*zip(*transitions))
+        #         self.rl_agent.update_parameters(batch)
 
-            #Synch RL Agent to NE
-            if self.num_games % self.args.synch_period == 0:
-                self.rl_to_evo(self.rl_agent.actor, self.pop[worst_index])
-                self.evolver.rl_policy = worst_index
-                print('Synch from RL --> Nevo')
+        #     #Synch RL Agent to NE
+        #     if self.num_games % self.args.synch_period == 0:
+        #         self.rl_to_evo(self.rl_agent.actor, self.pop[worst_index])
+        #         self.evolver.rl_policy = worst_index
+        #         print('Synch from RL --> Nevo')
 
         return best_train_fitness, test_score, elite_index
 

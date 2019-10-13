@@ -176,7 +176,7 @@ if __name__ == "__main__":
     time_tracker = utils.Tracker(parameters, ['time_erl'], '_score.csv')
 
     #Create Env
-    env = utils.NormalizedActions(env_tag)#gym.make(env_tag))
+    env = utils.NormalizedActions(gym.make(env_tag))
     parameters.action_dim = env.action_space.shape[0]
     parameters.state_dim = env.observation_space.shape[0]
 

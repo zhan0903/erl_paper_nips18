@@ -150,6 +150,8 @@ class Agent:
         test_score = 0.0
         for eval in range(5): test_score += self.evaluate(self.pop[champ_index], is_render=True, is_action_noise=False, store_transition=False)/5.0
 
+        exit(0)
+
         #NeuroEvolution's probabilistic selection and recombination step
         elite_index = self.evolver.epoch(self.pop, all_fitness)
 

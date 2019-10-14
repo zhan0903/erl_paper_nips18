@@ -112,6 +112,8 @@ class Agent:
             next_state = utils.to_tensor(next_state).unsqueeze(0)
             if self.args.is_cuda:
                 next_state = next_state.cuda()
+
+            print("reward",reward)
             total_reward += reward
 
             if store_transition: self.add_experience(state, action, next_state, reward, done)

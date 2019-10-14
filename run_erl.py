@@ -130,6 +130,7 @@ class Agent:
         ####################### EVOLUTION #####################
         all_fitness = []
         #Evaluate genomes/individuals
+        print("num_evals",self.args.num_evals)
         for net in self.pop:
             fitness = 0.0
             for eval in range(self.args.num_evals): fitness += self.evaluate(net, is_render=False, is_action_noise=False)
@@ -149,7 +150,7 @@ class Agent:
 
         ####################### DDPG #########################
         #DDPG Experience Collection
-        self.evaluate(self.rl_agent.actor, is_render=False, is_action_noise=True) #Train
+        # self.evaluate(self.rl_agent.actor, is_render=False, is_action_noise=True) #Train
 
         # #DDPG learning step
         # if len(self.replay_buffer) > self.args.batch_size * 5:

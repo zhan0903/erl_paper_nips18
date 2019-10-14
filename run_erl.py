@@ -170,7 +170,7 @@ class Agent:
 if __name__ == "__main__":
     parameters = Parameters(args.seed)  # Create the Parameters class
     # parameters.seed = args.seed
-    print("parameters.seed,", parameters.seed)
+    # print("parameters.seed,", parameters.seed)
 
     tracker = utils.Tracker(parameters, ['erl'], '_score.csv')  # Initiate tracker
     frame_tracker = utils.Tracker(parameters, ['frame_erl'], '_score.csv')  # Initiate tracker

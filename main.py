@@ -141,6 +141,10 @@ class Agent:
 
         #Validation test
         champ_index = all_fitness.index(max(all_fitness))
+        print("all_fitness",all_fitness,"champ_index",champ_index)
+
+
+
         test_score = 0.0
         for eval in range(5): test_score += self.evaluate(self.pop[champ_index], is_render=True, is_action_noise=False, store_transition=False)/5.0
 

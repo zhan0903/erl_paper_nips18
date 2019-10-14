@@ -12,6 +12,8 @@ class SSNE:
         self.population_size = self.args.pop_size;
         self.num_elitists = int(self.args.elite_fraction * args.pop_size)
         if self.num_elitists < 1: self.num_elitists = 1
+        fastrand.pcg32_seed(0)
+
 
         self.rl_policy = None
         self.selection_stats = {'elite': 0, 'selected': 0, 'discarded':0, 'total':0.0000001}
